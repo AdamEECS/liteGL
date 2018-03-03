@@ -171,9 +171,9 @@ class Canvas extends Object {
             let [a, b, c] = t.map(i => mesh.vertices[i])
             let [v1, v2, v3] = [a, b, c].map(v => self.project(v, transform))
             self.drawTriangle(v1, v2, v3)
-            // self.drawLine(v1.position, v2.position)
-            // self.drawLine(v1.position, v3.position)
-            // self.drawLine(v2.position, v3.position)
+            self.drawLine(v1.position, v2.position)
+            self.drawLine(v1.position, v3.position)
+            self.drawLine(v2.position, v3.position)
         }
     }
     fromimage(imageString) {

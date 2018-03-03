@@ -22,6 +22,8 @@
         <script src='color.js'></script>
         <script src='vector.js'></script>
         <script src='vertex.js'></script>
+        <script src='matrix.js'></script>
+        <script src='mesh.js'></script>
         <script src='canvas.js'></script>
     </head>
     <body>
@@ -29,6 +31,19 @@
 <script>
 const __main = function() {
     let canvas = Canvas.new('#id-canvas')
+
+    let mesh1 = Mesh.cube()
+    canvas.drawMesh(mesh1)
+
+    setInterval(function() {
+        canvas.clear()
+
+        mesh1.rotation.y += 0.05
+        mesh1.rotation.z += 0.02
+        canvas.drawMesh(mesh1)
+
+        canvas.render()
+    }, 50)
 
     canvas.render()
 
