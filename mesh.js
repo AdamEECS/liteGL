@@ -26,8 +26,8 @@ class Mesh extends Object {
         let vertices = []
         for (let i = 0; i < points.length; i += 3) {
             let v = Vector.new(points[i], points[i+1], points[i+2])
-            // let c = Color.red()
-            let c = Color.randomColor()
+            let c = Color.red()
+            // let c = Color.randomColor()
             vertices.push(Vertex.new(v, c))
         }
 
