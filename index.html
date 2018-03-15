@@ -11,7 +11,7 @@
             canvas {
                 outline: 1px dashed lightskyblue;
                 position: fixed;
-                background-color: white;
+                background-color: black;
                 left:50%;
                 top:50%;
                 transform:translate(-50%,-50%);
@@ -25,6 +25,8 @@
         <script src='matrix.js'></script>
         <script src='mesh.js'></script>
         <script src='canvas.js'></script>
+        <script src='string3d.js'></script>
+        <script src='stringImage.js'></script>
     </head>
     <body>
         <canvas id="id-canvas" width="800" height="600"></canvas>
@@ -32,18 +34,22 @@
 const __main = function() {
     let canvas = Canvas.new('#id-canvas')
 
-    let mesh1 = Mesh.cube()
+    // let mesh1 = Mesh.cube()
+    let mesh1 = Mesh.from3d(string3d)
+    mesh1.position = Vector.new(0, -2, -2)
     canvas.drawMesh(mesh1)
 
     setInterval(function() {
         canvas.clear()
 
         mesh1.rotation.y += 0.05
-        mesh1.rotation.z += 0.02
+        // mesh1.rotation.z += 0.02
         canvas.drawMesh(mesh1)
 
         canvas.render()
     }, 50)
+
+    // canvas.fromimage(stringImage)
 
     canvas.render()
 

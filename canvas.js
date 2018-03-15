@@ -103,12 +103,16 @@ class Canvas extends Object {
             if (x2 != x1) {
                 factor = (x - x1) / (x2 - x1);
             }
-            let v = a.interpolate(b, factor)
-            if (v.texture !== undefined) {
+            let position = a.position.interpolate(b.position, factor)
+            let color
+            if (a.texture !== undefined && b.texture !== undefined) {
                 let {w, h, pixels} = this.mesh
-                v.color = pixels[int(v.texture.y) * w + int(v.texture.x)]
+                let s = a.texture.interpolate(b.texture, factor)
+                color = pixels[int(s.y) * w + int(s.x)]
+            } else {
+                color = a.color.interpolate(b.color, factor)
             }
-            this.drawPoint(v.position, v.color)
+            this.drawPoint(position, color)
         }
     }
     drawTriangle(v1, v2, v3) {
@@ -171,9 +175,9 @@ class Canvas extends Object {
             let [a, b, c] = t.map(i => mesh.vertices[i])
             let [v1, v2, v3] = [a, b, c].map(v => self.project(v, transform))
             self.drawTriangle(v1, v2, v3)
-            self.drawLine(v1.position, v2.position)
-            self.drawLine(v1.position, v3.position)
-            self.drawLine(v2.position, v3.position)
+            // self.drawLine(v1.position, v2.position)
+            // self.drawLine(v1.position, v3.position)
+            // self.drawLine(v2.position, v3.position)
         }
     }
     fromimage(imageString) {

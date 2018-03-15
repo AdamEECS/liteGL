@@ -53,4 +53,49 @@ class Mesh extends Object {
         return m
     }
 
+    static from3d(string3d) {
+        let list = string3d.split('\n')
+        let verticesNum = int(list[2].split(' ')[1])
+        let trianglesNum = int(list[3].split(' ')[1])
+        let verticesList = list.slice(4, 4 + verticesNum)
+        let trianglesList = list.slice(4 + verticesNum, 4 + verticesNum + trianglesNum)
+        let [w, h, pixels] = Mesh.fromImage(stringImage)
+
+        let vertices = []
+        for (let i of verticesList) {
+            let [x, y, z, nx, ny, nz, u, v] = i.split(' ').map(j => Number(j))
+            let p = Vector.new(x, y, z)
+            u = int(u * w)
+            v = int(v * h)
+            let c = pixels[v * w + u]
+            let vertex = Vertex.new(p, c)
+            vertex.texture = Vector.new(u, v)
+            vertices.push(vertex)
+        }
+
+        let indices = trianglesList.map(i => i.split(' ').map(j => int(j)))
+        let m = this.new()
+        m.vertices = vertices
+        m.indices = indices
+        m.w = w
+        m.h = h
+        m.pixels = pixels
+        return m
+    }
+
+    static fromImage(stringImage) {
+        let list = stringImage.split('\n')
+        let w = int(list[2])
+        let h = int(list[3])
+        let data = list.slice(4)
+        data = data.map(i => i.split(' ').map(j => Number(j)))
+        let pixels = []
+        for (var y = 0; y < h; y++) {
+            for (var x = 0; x < w; x++) {
+                let color = Color.from32(data[y][x])
+                pixels.push(color)
+            }
+        }
+        return [w, h, pixels]
+    }
 }
