@@ -34,20 +34,20 @@
 const __main = function() {
     let canvas = Canvas.new('#id-canvas')
 
-    // let mesh1 = Mesh.cube()
-    let mesh1 = Mesh.from3d(string3d)
-    mesh1.position = Vector.new(0, -2, -2)
+    let mesh1 = Mesh.cube()
+    // let mesh1 = Mesh.from3d(string3d)
+    // mesh1.position = Vector.new(0, -2, -2)
     canvas.drawMesh(mesh1)
 
-    setInterval(function() {
-        canvas.clear()
-
-        mesh1.rotation.y += 0.05
-        // mesh1.rotation.z += 0.02
-        canvas.drawMesh(mesh1)
-
-        canvas.render()
-    }, 50)
+    // setInterval(function() {
+    //     canvas.clear()
+    //
+    //     mesh1.rotation.y += 0.05
+    //     // mesh1.rotation.z += 0.02
+    //     canvas.drawMesh(mesh1)
+    //
+    //     canvas.render()
+    // }, 50)
 
     // canvas.fromimage(stringImage)
 

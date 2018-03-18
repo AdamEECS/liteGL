@@ -68,7 +68,7 @@ class Canvas extends Object {
             }
         }
     }
-    drawLine(v1, v2, color=Color.black()) {
+    drawLine(v1, v2, color=Color.white()) {
         let [x1, y1, x2, y2] = [v1.x, v1.y, v2.x, v2.y]
         let dx = x2 - x1
         let dy = y2 - y1
@@ -174,10 +174,10 @@ class Canvas extends Object {
         for (let t of mesh.indices) {
             let [a, b, c] = t.map(i => mesh.vertices[i])
             let [v1, v2, v3] = [a, b, c].map(v => self.project(v, transform))
-            self.drawTriangle(v1, v2, v3)
-            // self.drawLine(v1.position, v2.position)
-            // self.drawLine(v1.position, v3.position)
-            // self.drawLine(v2.position, v3.position)
+            // self.drawTriangle(v1, v2, v3)
+            self.drawLine(v1.position, v2.position)
+            self.drawLine(v1.position, v3.position)
+            self.drawLine(v2.position, v3.position)
         }
     }
     fromimage(imageString) {
